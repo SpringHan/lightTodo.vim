@@ -1,0 +1,55 @@
+*todolist.txt*							Make you can use todolist in (neo)vim
+
+Version: 1.0.0
+Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
+License: MIT
+
+==============================================================================
+CONTENTS													*todolist-contents*
+
+Introduction					todolist-introduction
+Install							todolist-Install
+Command							todolist-command
+
+==============================================================================
+INTRODUCTION											*todolist-introduction*
+
+TodoList is a plug which make you can use todolist in (neo)vim.
+
+Note: It doesn't need other requirement.
+
+==============================================================================
+INSTALL														*todolist-install*
+
+You can use [vim-plug](https://github.com/junegunn/vim-plug) to install, in
+.vimrc(for vim) or init.vim(for neovim):
+
+  Plug 'SpringHan/todolist.vim'
+
+and then run :
+
+  :PlugInstall
+
+==============================================================================
+COMMAND														*todolist-command*
+
+":TodoListToggle":~
+
+Show the TodoList view.
+
+":TodoListAdd {ThingContent}":~
+
+Add things which need to do.
+
+":TodoListDelete {ThingsContent}|{ThingsNum}":~
+
+Delete things by their content or Number.
+
+":TodoListDone {ThingsContent}|{ThingsNum}":~
+
+Done the things by their content or Number.
+
+":TodoListClean":~
+
+Delete all the things.
+vim: tw=78 ts=4 sw=4 sts=4 ft=help
