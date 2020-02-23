@@ -12,7 +12,7 @@ function! ReadTodoFile()
 		if type(g:TodoListFile) == 1
 			let s:todoContents = readfile(g:TodoListFile)
 			let s:lineNum = 2
-			set splitright
+			set splitright  "是否需要,执行完是否还原?
 			exec "vsplit TodoList"
 			call append(0, '[TodoList]')
 			for line in g:todoContents
