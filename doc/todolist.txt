@@ -1,4 +1,4 @@
-*todolist-vim.txt*							Make you can use todolist in (neo)vim
+*todolist-vim.txt*						Make you can use todolist in (neo)vim
 
 Version: 1.0.0
 Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>

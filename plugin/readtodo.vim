@@ -11,9 +11,13 @@ function! ReadTodoFile()
 	else
 		if type(g:TodoListFile) == 1
 			let s:todoContents = readfile(g:TodoListFile)
+			let s:lineNum = 2
 			set splitright
-			split
-			for line in g:todoContents "这里我需要打开vim分屏，然后在右边屏幕输出list内容。在输出之前，要用正则表达式匹配每一行的事项，并将带有`-`前缀的删掉前缀，改为[OK]
+			exec "vsplit TodoList"
+			call append(0, '[TodoList]')
+			for line in g:todoContents
+				call append(s:lineNum, line)
+				let s:lineNum = s:lineNum + 1 "这里差正则修改内容和高亮，高亮我来写
 			endfor
 		else
 			echohl Error
