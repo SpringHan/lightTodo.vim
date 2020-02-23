@@ -1,0 +1,3 @@
+#### Important variables
+
+`g:TodoListLoaded`

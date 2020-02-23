@@ -1,4 +1,4 @@
-*todolist.txt*							Make you can use todolist in (neo)vim
+*todolist-vim.txt*							Make you can use todolist in (neo)vim
 
 Version: 1.0.0
 Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
@@ -9,6 +9,7 @@ CONTENTS													*todolist-contents*
 
 Introduction					todolist-introduction
 Install							todolist-Install
+Configuration					todolist-configuration
 Command							todolist-command
 
 ==============================================================================
@@ -29,6 +30,16 @@ You can use [vim-plug](https://github.com/junegunn/vim-plug) to install, in
 and then run :
 
   :PlugInstall
+
+==============================================================================
+CONFIGURATION											*todolist-configuration*
+
+You should set the position and file you want to save the todo in (neo)vim:
+
+  let g:TodoListFile = '/path/to/file'
+
+And if you are using [todo](https://github.com/mattn/todo), you can set the
+path to `~/.todo`.Then your (neo)vim can be connected to [todo].
 
 ==============================================================================
 COMMAND														*todolist-command*

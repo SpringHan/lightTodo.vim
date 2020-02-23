@@ -5,6 +5,8 @@
 " Repository: https://github.com/SpringHan/todolist.vim
 " License: MIT
 
-if exists(g:TodoListLoaded) && v:version == 100
+" Autoloads {{{
+if exists('g:TodoListLoaded')
 	finish
 endif
+let g:TodoListLoaded = 1 "}}}
