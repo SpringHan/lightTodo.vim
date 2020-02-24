@@ -1,8 +1,8 @@
 " Make you can use todolist in (neo)vim
-" Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
+" Author SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
 " Last Change: <+++>
 " Version: 1.0.0
-" Repository: https://github.com/SpringHan/todolist.vim
+" Repository: http//github.com/SpringHan/todolist.vim
 " License: MIT
 
 " Autoloads {{{
@@ -13,10 +13,10 @@ let g:TodoListLoaded = 1
 let g:TodoListToggled = 0 " }}}
 
 " Commands Defines {{{
-command! -nargs=0 TodoListToggle :call s:TodoToggle()
+command! -nargs=0 TodoListToggle :call TodoToggle()
 " }}}
 
-function! s:TodoListLoadSyntax()
+function! TodoListLoadSyntax()
 	syntax clear
 	syntax match TodoListTitle /^\[TodoList\]/
 	syntax match TodoListNumber /Total\+\s\+\d/
@@ -30,7 +30,7 @@ function! s:TodoListLoadSyntax()
 endfunction
 
 " FUNCTION: ReadTodoFile {{{
-function! s:ReadTodoFile()
+function! ReadTodoFile()
 	if !exists('g:TodoListFile')
 		echohl Error
 		echom 'You have not set the TodolistFile, please run :help todolist-configuration to know about it.'
@@ -41,7 +41,7 @@ function! s:ReadTodoFile()
 			let l:lineNum = 1
 			let l:lines = 0
 			exec "vertical botright 50new"
-			setlocal nonumber buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+            setlocal nonumber buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
 			\ modifiable statusline=>\ TodoList nofoldenable
 			if exists('&relativenumber')
 				setlocal norelativenumber
@@ -55,8 +55,8 @@ function! s:ReadTodoFile()
 				endif
 			endfor
 			call append(0, '[TodoList] Total '.l:lines)
-			call s:TodoListLoadSyntax()
-			setlocal nomodifiable
+			call TodoListLoadSyntax()
+            setlocal nomodifiable
 		else
 			echohl Error
 			echom 'The TodoListFile you defined is not a String, please run :help todolist-configuration to know about it.'
@@ -65,25 +65,55 @@ function! s:ReadTodoFile()
 	endif
 endfunction " }}}
 
-function! s:TodoToggle()
+function! TodoToggle()
 	if g:TodoListToggled == 0
-		call s:ReadTodoFile()
+		call ReadTodoFile()
 		let g:TodoListToggled = 1
 	elseif g:TodoListToggled == 1
-		"Close我还没写，我明天写
+		"Close我还没写，我明天写 close 
 		let g:TodoListToggled = 0
 	endif
 endfunction
 
-function! s:AddTodo()
-	let s:newtodo = input("Input your todo: ")
+function UpdateWindow()  "计算total,对todo编号,刷新todocontent
+
+endfunction
+
+
+function! AddTodo()
+	let newtodo = input("Input your todo: ")
 	if exists('g:TodoListFile')
-		call setline(1, s:newtodo)
+		setlocal modifiable buftype=
+		call append(2,newtodo)
+        call UpdateWindow()
+		setlocal nomodifiable buftype=nofile
 	else
 		echohl Error
 		echom 'The TodoListFile you defined is not a String, please run :help todolist-configuration to know about it.'
 		echohl None
 	endif
+endfunction
+
+function! SaveTodo() "将window内容写入文件内 closewindow时调用Save
+	setlocal modifiable buftype=
+    execute "normal! ggdddd "
+	let l:todoContents = readfile(g:TodoListFile) "todoContents 未刷新
+    let l:fileContents = writefile(todoContents,g:TodoListFile)
+	setlocal nomodifiable buftype=nofile
+endfunction
+
+function! EditTodo() "修改todo项
+endfunction
+
+function RemoveTodo() 
+	let deletetodo = input("input which todo you want to delete:")
+    execute "normal :deletetodo+2"
+    execute "dd"
+    " if "DONE"
+    "     execute "dd"
+    " else
+    "     echohl "you have not complete the task"
+    " endif
 endfunction
 
 function! s:UndoneTodo()
@@ -94,7 +124,5 @@ function! s:ComleteTodo()
 	execute "normal! ^i-"
 endfunction
 
-function! s:EditTodo() "修改todo项
-endfunction
 
 "可添加功能:排序,自动插入日期,一键全部完成,删除内容恢复
