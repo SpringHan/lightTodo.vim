@@ -1,4 +1,4 @@
-*todolist-vim.txt*						Make you can use todolist in (neo)vim
+*todolist*								Make you can use todolist in (neo)vim
 
 Version: 1.0.0
 Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
@@ -7,10 +7,10 @@ License: MIT
 ==============================================================================
 CONTENTS													*todolist-contents*
 
-Introduction					todolist-introduction
-Install							todolist-Install
-Configuration					todolist-configuration
-Command							todolist-command
+Introduction					|todolist-introduction|
+Install							|todolist-Install|
+Configuration					|todolist-configuration|
+Command							|todolist-command|
 
 ==============================================================================
 INTRODUCTION											*todolist-introduction*
@@ -37,6 +37,7 @@ CONFIGURATION											*todolist-configuration*
 You should set the position and file you want to save the todo in (neo)vim:
 
   let g:TodoListFile = '/path/to/file'
+  Note: There must be absolute path.
 
 And if you are using [todo](https://github.com/mattn/todo), you can set the
 path to `~/.todo`.Then your (neo)vim can be connected to [todo].
@@ -44,23 +45,27 @@ path to `~/.todo`.Then your (neo)vim can be connected to [todo].
 ==============================================================================
 COMMAND														*todolist-command*
 
-":TodoListToggle":~
+":TodoListToggle"~
 
-Show the TodoList view.
+Show or hide the TodoList view.
 
-":TodoListAdd {ThingContent}":~
+":TodoListAdd"~
 
 Add things which need to do.
 
-":TodoListDelete {ThingsContent}|{ThingsNum}":~
+":TodoListDelete"~
 
-Delete things by their content or Number.
+Delete things by their Numbers.
 
-":TodoListDone {ThingsContent}|{ThingsNum}":~
+":TodoListDone"~
 
-Done the things by their content or Number.
+Done the things by their Numbers.
 
-":TodoListClean":~
+":TodoListUndone"~
+
+Undone the things by their Numbers.
+
+":TodoListClean"~
 
 Delete all the things.
-vim: tw=78 ts=4 sw=4 sts=4 ft=help
+vim:tw=78:nosta:noet:ts=4:sts=0:ft=help:noet:fen:fdm=marker:
