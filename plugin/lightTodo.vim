@@ -1,6 +1,6 @@
 " A light todolist in (neo)vim.
 " Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
-" Last Change: <+++>
+" Last Change: 2020.2.25
 " Version: 1.0.0
 " Repository: http//github.com/SpringHan/lightTodo.vim
 " License: MIT
