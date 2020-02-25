@@ -73,7 +73,7 @@ function! s:ReadTodoFile(mode, autoLine)
 				exec "vertical botright 50new"
 				let s:bufTodo = bufnr('')
 				setlocal nonumber buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-				\ modifiable statusline=>\ TodoList nofoldenable
+				\ modifiable statusline=>\ TodoList nocursorline nofoldenable
 				if exists('&relativenumber')
 					setlocal norelativenumber
 				endif
