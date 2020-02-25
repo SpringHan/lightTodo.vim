@@ -1,26 +1,26 @@
-*todolist*								Make you can use todolist in (neo)vim
+*lightTodo*										A light todolist in (neo)vim
 
 Version: 1.0.0
 Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
 License: MIT
 
 ==============================================================================
-CONTENTS													*todolist-contents*
+CONTENTS													*lightTodo-contents*
 
-Introduction					|todolist-introduction|
-Install							|todolist-Install|
-Configuration					|todolist-configuration|
-Command							|todolist-command|
+Introduction					|lightTodo-introduction|
+Install							|lightTodo-Install|
+Configuration					|lightTodo-configuration|
+Command							|lightTodo-command|
 
 ==============================================================================
-INTRODUCTION											*todolist-introduction*
+INTRODUCTION											*lightTodo-introduction*
 
-TodoList is a plug which make you can use todolist in (neo)vim.
+LightTodo is a light todolist in (neo)vim.
 
 Note: It doesn't need other requirement.
 
 ==============================================================================
-INSTALL														*todolist-install*
+INSTALL														*lightTodo-install*
 
 You can use [vim-plug](https://github.com/junegunn/vim-plug) to install, in
 .vimrc(for vim) or init.vim(for neovim):
@@ -32,40 +32,50 @@ and then run :
   :PlugInstall
 
 ==============================================================================
-CONFIGURATION											*todolist-configuration*
+CONFIGURATION											*lightTodo-configuration*
 
 You should set the position and file you want to save the todo in (neo)vim:
 
-  let g:TodoListFile = '/path/to/file'
+  let g:LightTodoFile = '/path/to/file'
+  or
+  let g:LightTodoFile = $HOME.'/file'
   Note: There must be absolute path.
 
 And if you are using [todo](https://github.com/mattn/todo), you can set the
 path to `~/.todo`.Then your (neo)vim can be connected to [todo].
 
 ==============================================================================
-COMMAND														*todolist-command*
+COMMAND														*lightTodo-command*
 
-":TodoListToggle"~
+":LightTodoToggle"~
 
-Show or hide the TodoList view.
+Show or hide the LightTodo view.
 
-":TodoListAdd"~
+":LightTodoAdd"~
 
-Add things which need to do.
+Add todo by name.
 
-":TodoListDelete"~
+":LightTodoDelete"~
 
-Delete things by their Numbers.
+Delete todo by its number.
 
-":TodoListDone"~
+":LightTodoDone"~
 
-Done the things by their Numbers.
+Done todo by its number.
 
-":TodoListUndone"~
+":LightTodoUndone"~
 
-Undone the things by their Numbers.
+Undone todo by its number.
 
-":TodoListClean"~
+":LightTodoAllDone"~
+
+Done all the todos.
+
+":LightTodoAllUndone"~
+
+Undone all the todos.
+
+":LightTodoClean"~
 
 Delete all the things.
 vim:tw=78:nosta:noet:ts=4:sts=0:ft=help:noet:fen:fdm=marker:
