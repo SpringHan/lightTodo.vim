@@ -13,7 +13,7 @@
 Using [vim-plug](https://github.com/junegunn/vim-plug) is the best way to install the plugin.You should insert:
 
 ```vim
-Plug 'SpringHan/lightLine.vim'
+Plug 'SpringHan/lightTodo.vim'
 ```
 
 in your `.vimrc`(for vim) or `init.vim`(for neovim).
