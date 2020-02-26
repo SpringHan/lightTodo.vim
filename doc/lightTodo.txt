@@ -78,4 +78,4 @@ Undone all the todos.
 ":LightTodoClean"~
 
 Delete all the things.
-vim:tw=78:nosta:noet:ts=4:sts=0:ft=help:noet:fen:fdm=marker:
+vim:tw=78:nosta:ts=4:sts=0:ft=help:noet:fen:fdm=marker:
