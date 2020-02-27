@@ -1,11 +1,11 @@
-*lightTodo*										A light todolist in (neo)vim
+*lightTodo*					A light todolist in (neo)vim
 
 Version: 1.0.0
 Authors: SpringHan <3379184879@qq.com>, VainJoker <vainjoker@163.com>
 License: MIT
 
 ==============================================================================
-CONTENTS													*lightTodo-contents*
+CONTENTS						*lightTodo-contents*
 
 Introduction					|lightTodo-introduction|
 Install							|lightTodo-Install|
@@ -13,14 +13,14 @@ Configuration					|lightTodo-configuration|
 Command							|lightTodo-command|
 
 ==============================================================================
-INTRODUCTION											*lightTodo-introduction*
+INTRODUCTION						*lightTodo-introduction*
 
 LightTodo is a light todolist in (neo)vim.
 
 Note: It doesn't need other requirement.
 
 ==============================================================================
-INSTALL														*lightTodo-install*
+INSTALL							*lightTodo-install*
 
 You can use [vim-plug](https://github.com/junegunn/vim-plug) to install, in
 .vimrc(for vim) or init.vim(for neovim):
@@ -32,7 +32,7 @@ and then run :
   :PlugInstall
 
 ==============================================================================
-CONFIGURATION											*lightTodo-configuration*
+CONFIGURATION						*lightTodo-configuration*
 
 You should set the position and file you want to save the todo in (neo)vim:
 
@@ -45,7 +45,7 @@ And if you are using [todo](https://github.com/mattn/todo), you can set the
 path to `~/.todo`.Then your (neo)vim can be connected to [todo].
 
 ==============================================================================
-COMMAND														*lightTodo-command*
+COMMAND							*lightTodo-command*
 
 ":LightTodoToggle"~
 
@@ -78,4 +78,6 @@ Undone all the todos.
 ":LightTodoClean"~
 
 Delete all the things.
-vim:tw=78:nosta:noet:ts=4:sts=0:ft=help:noet:fen:fdm=marker:
+
+==============================================================================
+vim:tw=78:nosta:noet:sw=4:ts=8:sts=0:ft=help:noet:fen:fdm=marker:
