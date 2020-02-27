@@ -8,9 +8,9 @@ License: MIT
 CONTENTS						*lightTodo-contents*
 
 Introduction					|lightTodo-introduction|
-Install							|lightTodo-Install|
+Install						|lightTodo-Install|
 Configuration					|lightTodo-configuration|
-Command							|lightTodo-command|
+Command						|lightTodo-command|
 
 ==============================================================================
 INTRODUCTION						*lightTodo-introduction*
