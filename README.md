@@ -32,7 +32,7 @@ or
 let g:LightTodoFile = $HOME.'file'
 ```
 
-Note: The path must be a absolute path.
+Note: The path must be an absolute path.
 
 ## License
 

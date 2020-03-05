@@ -39,7 +39,7 @@ You should set the position and file you want to save the todo in (neo)vim:
   let g:LightTodoFile = '/path/to/file'
   or
   let g:LightTodoFile = $HOME.'/file'
-  Note: There must be absolute path.
+  Note: There must be an absolute path.
 
 And if you are using [todo](https://github.com/mattn/todo), you can set the
 path to `~/.todo`.Then your (neo)vim can be connected to [todo].
