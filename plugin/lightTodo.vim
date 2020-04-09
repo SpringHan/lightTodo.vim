@@ -117,7 +117,7 @@ function! s:TodoToggle()
 		call s:ReadTodoFile(0, 0)
 		let g:TodoListToggled = 1
 	elseif g:TodoListToggled == 1
-		silent! exec "bd" s:bufTodo
+		silent! exec "bd ".s:bufTodo
 		let g:TodoListToggled = 0
 	endif
 endfunction " }}}
