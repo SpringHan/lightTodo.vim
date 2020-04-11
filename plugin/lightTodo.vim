@@ -105,6 +105,7 @@ function! s:ReadTodoFile(mode, autoLine)
 			call append(0, '[TodoList] Total '.s:lines)
 			call s:TodoListLoadSyntax()
 			setlocal nomodifiable
+			nnoremap <buffer> <ESC> :LightTodoToggle<CR>
 		else
 			call s:ThrowError(2)
 		endif
