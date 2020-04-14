@@ -46,7 +46,7 @@ command! -nargs=0 LightTodoClean call s:CleanTodo()
 function! s:TodoListLoadSyntax()
 	syntax clear
 	syntax match TodoListTitle /^\[TodoList\]/
-	syntax match TodoListNumber /Total\+\s\+\d/
+	syntax match TodoListNumber /Total\s[0-9]\+/
 	syntax match TodoListDones /^\[Done\]/
 	highlight default link TodoListTitle TodoTitle
 	highlight default link TodoListNumber TodoNumbers
