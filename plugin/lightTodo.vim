@@ -1,6 +1,6 @@
 " A light todolist in (neo)vim.
 " Authors: SpringHan <springchohaku@qq.com>, VainJoker <vainjoker@163.com>
-" Last Change: 2020.2.25
+" Last Change: 2020.4.15
 " Version: 1.0.0
 " Repository: http//github.com/SpringHan/lightTodo.vim
 " License: MIT
@@ -58,57 +58,51 @@ endfunction " }}}
 
 " FUNCTION: ReadTodoFile {{{
 function! s:ReadTodoFile(mode, autoLine)
-	if !exists('g:LightTodoFile')
-		call s:ThrowError(1)
-	else
-		if type(g:LightTodoFile) == 1
-			let l:todoContents = readfile(g:LightTodoFile)
-			let l:lineNum = 1
-			if a:autoLine == 0
-				let s:lines = 0
-			elseif type(a:autoLine) == 0 && a:autoLine != 0
-				let s:lines = a:autoLine
-			endif
-			if a:mode == 0
-				exec "vertical botright 50new"
-				let s:bufTodo = bufnr('')
-				setlocal nonumber buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-				\ modifiable statusline=>\ TodoList nocursorline nofoldenable
-				if exists('&relativenumber')
-					setlocal norelativenumber
-				endif
-			else
-				setlocal modifiable
-				let l:newLines = s:lines + 2
-				exec "0delete".l:newLines
-				unlet l:newLines
-			endif
-			if a:mode == 1
-				let s:lines += 1
-			elseif a:mode == 2
-				let s:lines -= 1
-			elseif a:mode == 3
-				let s:lines = 0
-			endif
-			for line in l:todoContents
-				call append(l:lineNum, line)
-				let l:lineNum += 1
-				if a:mode == 0
-					let s:lines += 1
-				endif
-				if line =~ '^-'
-					silent! exec "%s/^-/[Done]"
-					silent! exec "normal! /^\n"
-					silent! exec "nohlsearch"
-				endif
-			endfor
-			call append(0, '[TodoList] Total '.s:lines)
-			call s:TodoListLoadSyntax()
-			setlocal nomodifiable
-			nnoremap <buffer> <ESC> :LightTodoToggle<CR>
-		else
-			call s:ThrowError(2)
+	execute !exists('g:LightTodoFile')?"call s:ThrowError(1)":""
+	if type(g:LightTodoFile) == 1
+		let l:todoContents = readfile(g:LightTodoFile)
+		let l:lineNum = 1
+		if a:autoLine == 0
+			let s:lines = 0
+		elseif type(a:autoLine) == 0 && a:autoLine != 0
+			let s:lines = a:autoLine
 		endif
+		if a:mode == 0
+			exec "vertical botright 50new"
+			let s:bufTodo = bufnr('')
+			setlocal nonumber buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+			\ modifiable statusline=>\ TodoList nocursorline nofoldenable norelativenumber
+		else
+			setlocal modifiable
+			let l:newLines = s:lines + 2
+			exec "0delete".l:newLines
+			unlet l:newLines
+		endif
+		if a:mode == 1
+			let s:lines += 1
+		elseif a:mode == 2
+			let s:lines -= 1
+		elseif a:mode == 3
+			let s:lines = 0
+		endif
+		for line in l:todoContents
+			call append(l:lineNum, line)
+			let l:lineNum += 1
+			if a:mode == 0
+				let s:lines += 1
+			endif
+			if line =~ '^-'
+				silent exec "%s/^-/[Done]"
+				silent exec "normal! /^\n"
+				silent exec "nohlsearch"
+			endif
+		endfor
+		call append(0, '[TodoList] Total '.s:lines)
+		call s:TodoListLoadSyntax()
+		setlocal nomodifiable
+		nnoremap <silent><buffer> <ESC> :LightTodoToggle<CR>
+	else
+		call s:ThrowError(2)
 	endif
 endfunction " }}}
 
@@ -118,7 +112,7 @@ function! s:TodoToggle()
 		call s:ReadTodoFile(0, 0)
 		let g:TodoListToggled = 1
 	elseif g:TodoListToggled == 1
-		silent! exec "bd ".s:bufTodo
+		silent exec "bd ".s:bufTodo
 		let g:TodoListToggled = 0
 	endif
 endfunction " }}}
@@ -127,15 +121,9 @@ endfunction " }}}
 function! s:AddTodo()
 	let l:newtodo = input("Input the new todo: ")
 	if exists('g:LightTodoFile')
-		if type(g:LightTodoFile) != 1
-			call s:ThrowError(2)
-		endif
+		execute type(g:LightTodoFile) != 1?"call s:ThrowError(2)":""
 		call writefile([l:newtodo], g:LightTodoFile, "a")
-		if g:TodoListToggled == 1
-			call s:ReadTodoFile(1, s:lines)
-		else
-			call s:TodoToggle()
-		endif
+		silent execute g:TodoListToggled == 1?"call s:ReadTodoFile(1, s:lines)":"call s:TodoToggle()"
 	else
 		call s:ThrowError(1)
 	endif
@@ -149,15 +137,11 @@ function! s:DeleteTodo()
 			let l:todoList = []
 			let l:deletetodo = str2nr(input("Input the todo Number: "), 10) " String to Number
 			for line in readfile(g:LightTodoFile)
-				if l:todoLine != l:deletetodo
-					call add(l:todoList, line)
-				endif
+				silent execute l:todoLine != l:deletetodo?"call add(l:todoList, line)":""
 				let l:todoLine += 1
 			endfor
 			call writefile(l:todoList, g:LightTodoFile)
-			if g:TodoListToggled == 1
-				call s:ReadTodoFile(2, s:lines)
-			endif
+			silent execute g:TodoListToggled == 1?"call s:ReadTodoFile(2, s:lines)":""
 		else
 			call s:ThrowError(2)
 		endif
@@ -172,26 +156,17 @@ function! s:DoneTodo(doneType)
 		if type(g:LightTodoFile) == 1
 			let l:todoList = []
 			let l:todoLine = 1
-			if a:doneType == 0
-				let l:doneTodo = str2nr(input("Input the todo number: "), 10)
-			elseif a:doneType == 1
-				let l:undoneTodo = str2nr(input("Input the todo number: "), 10)
-			endif
+			silent execute a:doneType == 0?"let l:doneTodo = str2nr(input(\"Input the todo number: \"), 10)":""
+			silent execute a:doneType == 1?"let l:undoneTodo = str2nr(input(\"Input the todo number: \"), 10)":""
 			for line in readfile(g:LightTodoFile)
 				if a:doneType == 0
 					if l:todoLine == l:doneTodo
-						if line =~ '^-'
-							call s:ThrowError(3)
-							return
-						endif
+						execute line =~ '^-'?"call s:ThrowError(3) | return":""
 						let line = '-'.line
 					endif
 				elseif a:doneType == 1
 					if l:todoLine == l:undoneTodo
-						if line !~ '^-'
-							call s:ThrowError(4)
-							return
-						endif
+						execute line !~ '^-'?"call s:ThrowError(4) | return":""
 						let line = substitute(line, '^-', '', '')
 					endif
 				endif
@@ -199,9 +174,7 @@ function! s:DoneTodo(doneType)
 				let l:todoLine += 1
 			endfor
 			call writefile(l:todoList, g:LightTodoFile)
-			if g:TodoListToggled == 1
-				call s:ReadTodoFile(4, s:lines)
-			endif
+			silent execute g:TodoListToggled == 1?"call s:ReadTodoFile(4, s:lines)":""
 		else
 			call s:ThrowError(2)
 		endif
@@ -217,22 +190,15 @@ function! s:DoneAllTodo(doneType)
 			let l:todoList = []
 			let l:todoLine = 1
 			for line in readfile(g:LightTodoFile)
-				if a:doneType == 0
-					if line != '^-'
-						let line = '-'.line
-					endif
+				if a:doneType == 0 | silent execute line != '^-'?"let line = '-'.line":""
 				elseif a:doneType == 1
-					if line =~ '^-'
-						let line = substitute(line, '^-', '', '')
-					endif
+					silent execute line =~ '^-'?"let line = substitute(line, '^-', '', '')":""
 				endif
 				call add(l:todoList, line)
 				let l:todoLine += 1
 			endfor
 			call writefile(l:todoList, g:LightTodoFile)
-			if g:TodoListToggled == 1
-				call s:ReadTodoFile(4, s:lines)
-			endif
+			silent execute g:TodoListToggled == 1?"call s:ReadTodoFile(4, s:lines)":""
 		else
 			call s:ThrowError(2)
 		endif
@@ -246,9 +212,7 @@ function! s:CleanTodo()
 	if exists('g:LightTodoFile')
 		if type(g:LightTodoFile) == 1
 			call writefile([], g:LightTodoFile)
-			if g:TodoListToggled == 1
-				call s:ReadTodoFile(3, s:lines)
-			endif
+			silent execute g:TodoListToggled == 1?"call s:ReadTodoFile(3, s:lines)":""
 		else
 			call s:ThrowError(2)
 		endif
