@@ -1,6 +1,6 @@
 " A light todolist in (neo)vim.
 " Authors: SpringHan <springchohaku@qq.com>, VainJoker <vainjoker@163.com>
-" Last Change: 2020.4.15
+" Last Change: 2020.4.16
 " Version: 1.0.0
 " Repository: http//github.com/SpringHan/lightTodo.vim
 " License: MIT
@@ -190,7 +190,7 @@ function! s:DoneAllTodo(doneType)
 			let l:todoList = []
 			let l:todoLine = 1
 			for line in readfile(g:LightTodoFile)
-				if a:doneType == 0 | silent execute line != '^-'?"let line = '-'.line":""
+				if a:doneType == 0 | silent execute line !~ '^-'?"let line = '-'.line":""
 				elseif a:doneType == 1
 					silent execute line =~ '^-'?"let line = substitute(line, '^-', '', '')":""
 				endif
