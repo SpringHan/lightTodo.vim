@@ -1,5 +1,7 @@
 ## LightTodo.vim
 
+## This repository have already stopped update.
+
 ### ScreenShot
 
 ![lightLine](./a.png)

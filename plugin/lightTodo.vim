@@ -48,12 +48,10 @@ function! s:TodoListLoadSyntax()
 	syntax match TodoListTitle /^\[TodoList\]/
 	syntax match TodoListNumber /Total\s[0-9]\+/
 	syntax match TodoListDones /^\[Done\]/
-	highlight default link TodoListTitle TodoTitle
-	highlight default link TodoListNumber TodoNumbers
-	highlight default link TodoListDones TodoDone
-	highlight TodoTitle ctermfg=142 guifg=#b8bb26
 	highlight TodoNumbers cterm=bold ctermbg=235 gui=bold guibg=bg ctermfg=229 guifg=#fbf1c7
-	highlight TodoDone ctermfg=121 gui=bold guifg=SeaGreen
+	highlight default link TodoListTitle Question
+	highlight default link TodoListNumber TodoNumbers
+	highlight default link TodoListDones Title
 endfunction " }}}
 
 " FUNCTION: ReadTodoFile {{{
